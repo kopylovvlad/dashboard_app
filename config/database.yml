@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 25
+  host: localhost
+
+development:
+  <<: *default
+  database: da_dev
+
+production:
+  <<: *default
+  database: da_prod
+
+test:
+  <<: *default
+  database: da_test
