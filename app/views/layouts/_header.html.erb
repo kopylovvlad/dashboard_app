@@ -1,0 +1,24 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Main page', root_path, class: 'navbar-brand' %>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <div class="navbar-form navbar-right">
+        <%- if current_user.present? %>
+          <%= link_to current_user.login, user_path(user_login: current_user.login), class: 'white_link ml-10' %>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'white_link ml-10' %>
+        <%- else %>
+          <%= link_to 'Registration', new_user_registration_path, class: 'white_link ml-10' %>
+          <%= link_to 'Login', new_user_session_path, class: 'white_link ml-10' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>
