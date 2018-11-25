@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20181124170020) do
   create_table "user_dashboards", force: :cascade do |t|
     t.integer "user_id"
     t.string "title", default: "", null: false
-    t.integer "position", default: 0
+    t.integer "position", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_dashboards_on_user_id"

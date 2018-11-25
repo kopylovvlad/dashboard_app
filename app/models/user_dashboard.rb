@@ -5,7 +5,7 @@
 #  id         :bigint(8)        not null, primary key
 #  user_id    :integer
 #  title      :string           default(""), not null
-#  position   :integer          default(0)
+#  position   :integer          default(1)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -19,6 +19,9 @@
 #
 
 class UserDashboard < ApplicationRecord
+  scope :ordered, -> { reorder(position: :asc) }
+  scope :siblings,  ->(i) { all_by_user(i.user_id).where.not(id: i.id).ordered }
+  scope :all_by_user,  ->(id) { where(user_id: id).ordered }
   belongs_to :user
 
   validates :title, presence: true

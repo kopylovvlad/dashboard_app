@@ -5,7 +5,7 @@
 #  id         :bigint(8)        not null, primary key
 #  user_id    :integer
 #  title      :string           default(""), not null
-#  position   :integer          default(0)
+#  position   :integer          default(1)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -24,76 +24,83 @@ RSpec.describe UserDashboard, type: :model do
   describe 'shoulda' do
     it { should validate_presence_of(:title) }
     it { should belong_to(:user) }
+    it { should validate_uniqueness_of(:title).scoped_to(:user_id) }
   end
 
-  describe 'title' do
-    describe 'uniqueness' do
-      it 'should not be the same for a user' do
+  let(:user1) { FactoryBot.create(:user) }
+  let(:user2) { FactoryBot.create(:user) }
+
+  describe 'scopes' do
+    def prepare_data
+      FactoryBot.create_list(
+        :user_dashboard,
+        3,
+        user: user1
+      )
+
+      FactoryBot.create_list(
+        :user_dashboard,
+        2,
+        user: user2
+      )
+
+      expect(UserDashboard.count).to eq(5)
+      expect(user1.user_dashboards.count).to eq(3)
+      expect(user2.user_dashboards.count).to eq(2)
+    end
+
+    describe 'all_by_user' do
+      it 'should work' do
         # prepare
-        user = FactoryBot.create(:user)
-        title = 'my_dashboard'
-        d1 = UserDashboard.create!(
-            title: title,
-            user: user
-        )
-        expect(user.user_dashboards.count).to eq(1)
+        prepare_data
 
         # action
-        d2 = UserDashboard.new(
-            title: title,
-            user: user
-        )
+        d1 = UserDashboard.all_by_user(user1).count
+        d2 = UserDashboard.all_by_user(user2).count
 
         # check
-        expect(d2.valid?).to eq(false)
-        expect(d2.save).to eq(false)
-        expect(user.user_dashboards.count).to eq(1)
+        expect(d1).to eq(3)
+        expect(d2).to eq(2)
+      end
+    end
+
+    describe 'siblings' do
+      it 'should work (case 1)' do
+        # prepare
+        prepare_data
+        d1, d2, d3 = user1.user_dashboards
+
+        # action
+        s1 = UserDashboard.siblings(d1)
+        s2 = UserDashboard.siblings(d2)
+        s3 = UserDashboard.siblings(d3)
+
+        # check
+        expect(s1.size).to eq(2)
+        s1.each { |i| expect([d2, d3]).to include(i) }
+
+        expect(s2.size).to eq(2)
+        s2.each { |i| expect([d1, d3]).to include(i) }
+
+        expect(s3.size).to eq(2)
+        s3.each { |i| expect([d1, d2]).to include(i) }
       end
 
-      it 'should be uniq for a user' do
+      it 'should work (case 2)' do
         # prepare
-        user = FactoryBot.create(:user)
-        title = 'my_dashboard1'
-        title2 = 'my_dashboard2'
-        d1 = UserDashboard.create!(
-            title: title,
-            user: user
-        )
-        expect(user.user_dashboards.count).to eq(1)
+        prepare_data
+        d1, d2 = user2.user_dashboards
 
         # action
-        d2 = UserDashboard.new(
-            title: title2,
-            user: user
-        )
+        s1 = UserDashboard.siblings(d1)
+        s2 = UserDashboard.siblings(d2)
 
         # check
-        expect(d2.valid?).to eq(true)
-        expect(d2.save).to eq(true)
-        expect(user.user_dashboards.count).to eq(2)
-      end
+        expect(s1.size).to eq(1)
+        expect(s1.first.id).to eq(d2.id)
 
-      it 'should be uniq for few users' do
-        # prepare
-        expect(UserDashboard.count).to eq(0)
-        user1 = FactoryBot.create(:user)
-        user2 = FactoryBot.create(:user)
-        title = 'dashboard_title'
-        d1 = UserDashboard.create!(
-            title: title,
-            user: user1
-        )
-
-        # action
-        d2 = UserDashboard.new(
-            title: title,
-            user: user2
-        )
-
-        # check
-        expect(d2.valid?).to eq(true)
-        expect(d2.save).to eq(true)
-        expect(UserDashboard.count).to eq(2)
+        expect(s2.size).to eq(1)
+        expect(s2.first.id).to eq(d1.id)
       end
     end
   end
