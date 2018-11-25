@@ -1,0 +1,38 @@
+<%= content_for :jumbotron do %>
+  <h2>
+    <%= t('.sign_up') %>
+  </h2>
+  <p>Registration</p>
+<% end %>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <div class="form-group">
+    <label>Email</label>
+    <%= f.input :email, label: false, required: true, autofocus: true, input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <label>First name</label>
+    <%= f.input :first_name, label: false, required: true, autofocus: true, input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <label>Last name</label>
+    <%= f.input :last_name, label: false, required: true, autofocus: true, input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <%= f.input :password, label: false, required: true, input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <label>Password Confirmation</label>
+    <%= f.input :password_confirmation, label: false, required: true, input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
+  </div>
+
+<% end %>

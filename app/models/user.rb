@@ -23,4 +23,9 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   has_many :user_dashboards, dependent: :destroy
+
+  def full_name
+    str = [first_name, last_name].join(' ')
+    str.strip
+  end
 end
