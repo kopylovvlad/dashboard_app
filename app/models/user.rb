@@ -16,12 +16,11 @@
 #  index_users_on_email  (email) UNIQUE
 #
 
-require 'rails_helper'
+class User < ApplicationRecord
+  devise :database_authenticatable, :registerable, :rememberable, :validatable
 
-RSpec.describe User, type: :model do
-  describe 'shoulda' do
-    it { should validate_presence_of(:first_name) }
-    it { should validate_presence_of(:last_name) }
-    it { should have_many(:user_dashboards).dependent(:destroy) }
-  end
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
+  has_many :user_dashboards, dependent: :destroy
 end

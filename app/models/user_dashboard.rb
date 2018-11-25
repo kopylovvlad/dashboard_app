@@ -18,8 +18,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-FactoryBot.define do
-  factory :user_dashboard do
-    title { Faker::Company.buzzword }
-  end
+class UserDashboard < ApplicationRecord
+  belongs_to :user
+
+  validates :title, presence: true
+  validates :title, uniqueness: { scope: :user_id }
 end
