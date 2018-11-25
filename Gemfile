@@ -19,7 +19,7 @@ gem 'rails', '~> 5.1.6'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 gem 'uglifier', '>= 1.3.0'
-gem 'devise'
+gem 'devise', '4.4.0'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
 
