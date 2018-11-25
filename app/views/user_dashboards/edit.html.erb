@@ -1,0 +1,7 @@
+<%= content_for :jumbotron do %>
+  <h2>Editing Dashboard</h2>
+<% end %>
+
+<%= render 'form', user_dashboard: @user_dashboard %>
+
+<%= link_to 'Back', user_dashboards_path %>

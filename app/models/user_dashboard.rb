@@ -26,4 +26,6 @@ class UserDashboard < ApplicationRecord
 
   validates :title, presence: true
   validates :title, uniqueness: { scope: :user_id }
+
+  self.per_page = 5
 end

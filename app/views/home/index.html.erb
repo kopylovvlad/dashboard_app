@@ -11,7 +11,8 @@
       Hello!
     <% end %>
     <br>
-    Click here to open your dashboard.
+    <%= link_to 'Click here', user_dashboards_path %>
+    to open your dashboards.
   </p>
 <% else %>
   <p>

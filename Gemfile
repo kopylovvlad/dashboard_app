@@ -22,6 +22,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'devise', '4.4.0'
 gem 'jquery-rails'
 gem 'font-awesome-sass'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'annotate'

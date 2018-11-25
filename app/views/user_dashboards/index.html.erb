@@ -1,0 +1,48 @@
+<%= content_for :jumbotron do %>
+  <h2>Your Dashboards</h2>
+<% end %>
+
+<%= link_to 'Create new dashboard', new_user_dashboard_path %>
+
+<p>
+  You have <%= @user_dashboards.count %> dashboards.
+</p>
+<% @user_dashboards.each do |user_dashboard| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= user_dashboard.title %>
+    </div>
+
+    <div class="panel-body">
+      <small>
+        Position: <%= user_dashboard.position %>
+      </small>
+      <br>
+
+      Counter 1:
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+
+      Counter 2:
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+
+      Counter 3:
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+
+      <br>
+      <%= link_to 'Edit', edit_user_dashboard_path(user_dashboard) %>
+      <br>
+      <%= link_to 'Destroy', user_dashboard, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+
+  <br>
+<% end %>
+
+
+<%= will_paginate @user_dashboards, renderer: BootstrapPagination::Rails %>
