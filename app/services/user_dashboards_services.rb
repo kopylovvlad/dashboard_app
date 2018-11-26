@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Here is updating position logic
 class UserDashboardsServices
   def create(dashboard)
@@ -16,13 +18,9 @@ class UserDashboardsServices
     if dashboard.position.nil? || dashboard.position <= 0
       dashboard.position = position_limit
     end
-    if dashboard.position > position_limit
-      dashboard.position = position_limit
-    end
+    dashboard.position = position_limit if dashboard.position > position_limit
 
-    if dashboard.valid?
-      reorder_items(dashboard)
-    end
+    reorder_items(dashboard) if dashboard.valid?
     dashboard
   end
 
@@ -32,9 +30,9 @@ class UserDashboardsServices
     ActiveRecord::Base.transaction do
       dashboard.save
       UserDashboard.siblings(dashboard).each do |item|
-          i += 1 if i == current_position
-          item.update_attributes(position: i)
-          i += 1
+        i += 1 if i == current_position
+        item.update(position: i)
+        i += 1
       end
     end
   end
