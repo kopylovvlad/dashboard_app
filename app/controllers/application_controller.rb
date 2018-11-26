@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied, with: :render_error
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   def render_not_found
     if request.xhr?

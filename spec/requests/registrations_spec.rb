@@ -36,8 +36,7 @@ RSpec.describe "Registrations", type: :request do
         get(edit_user_registration_path)
 
         # check
-        expect(response).to have_http_status(302)
-        expect(response).to redirect_to(new_user_session_path)
+        redirect_to_sign_in
       end
     end
 
@@ -69,8 +68,7 @@ RSpec.describe "Registrations", type: :request do
         )
 
         # check
-        expect(response).to have_http_status(302)
-        expect(response).to redirect_to(new_user_session_path)
+        redirect_to_sign_in
       end
     end
 
