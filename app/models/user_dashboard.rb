@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: user_dashboards
@@ -18,10 +20,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
+# UserDashboard model
 class UserDashboard < ApplicationRecord
   scope :ordered, -> { reorder(position: :asc) }
-  scope :siblings,  ->(i) { all_by_user(i.user_id).where.not(id: i.id).ordered }
-  scope :all_by_user,  ->(id) { where(user_id: id).ordered }
+  scope :siblings, ->(i) { all_by_user(i.user_id).where.not(id: i.id).ordered }
+  scope :all_by_user, ->(id) { where(user_id: id).ordered }
   belongs_to :user
 
   validates :title, presence: true

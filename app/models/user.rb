@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -16,6 +18,7 @@
 #  index_users_on_email  (email) UNIQUE
 #
 
+# User model
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :validatable
 
