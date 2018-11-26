@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Dashboard application. Monolithic RoR application.
 
-Things you may want to cover:
+## Ruby version
 
-* Ruby version
+ruby- 2.5.1
 
-* System dependencies
+## System dependencies
 
-* Configuration
+psql
 
-* Database creation
+## Database creation
 
-* Database initialization
+```bash
+rails db:create && rails db:migrate && rails db:seed
+```
 
-* How to run the test suite
+## How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+rspec spec/
+```
 
-* Deployment instructions
+## Heroku
 
-* ...
+```bash
+
+```
