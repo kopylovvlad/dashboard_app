@@ -8,6 +8,7 @@
   You have <%= @user_dashboards.count %> dashboards.
 </p>
 <% @user_dashboards.each do |user_dashboard| %>
+  <h2>Panel <%= user_dashboard.position %></h2>
   <div class="panel panel-default">
     <div class="panel-heading">
       <%= user_dashboard.title %>
