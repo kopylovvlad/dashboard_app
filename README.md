@@ -8,7 +8,7 @@ ruby- 2.5.1
 
 ## System dependencies
 
-psql
+PostgreSQL
 
 ## Database creation
 
@@ -25,5 +25,13 @@ rspec spec/
 ## Heroku
 
 ```bash
+open 'https://dashboards-app.herokuapp.com'
+```
 
+## User accounts
+
+```
+email:password
+john@example.com:12345678
+harry@example.com:12345678
 ```
