@@ -11,11 +11,13 @@ if user1.blank?
     last_name: 'Smith'
   )
 
-  FactoryBot.create_list(
-    :user_dashboard,
-    3,
-    user_id: user1.id
-  )
+  3.times do |_i|
+    item = FactoryBot.build(
+      :user_dashboard,
+      user_id: user1.id
+    )
+    UserDashboardsServices.new.create(item)
+  end
 end
 
 if user2.blank?
@@ -26,11 +28,13 @@ if user2.blank?
     last_name: 'Johnson'
   )
 
-  FactoryBot.create_list(
-    :user_dashboard,
-    5,
-    user_id: user2.id
-  )
+  5.times do |_i|
+    item = FactoryBot.build(
+      :user_dashboard,
+      user_id: user2.id
+    )
+    UserDashboardsServices.new.create(item)
+  end
 end
 
 l = Logger.new(STDOUT)
