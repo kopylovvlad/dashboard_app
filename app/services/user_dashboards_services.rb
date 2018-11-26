@@ -12,6 +12,17 @@ class UserDashboardsServices
     create_or_update(dashboard, position_limit)
   end
 
+  def destroy(dashboard)
+    ActiveRecord::Base.transaction do
+      dashboard.destroy!
+      i = 1
+      UserDashboard.all_by_user(dashboard.user_id).each do |item|
+        item.update(position: i)
+        i += 1
+      end
+    end
+  end
+
   private
 
   def create_or_update(dashboard, position_limit)

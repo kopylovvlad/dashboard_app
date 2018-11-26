@@ -45,7 +45,7 @@ class UserDashboardsController < ApplicationController
   end
 
   def destroy
-    @user_dashboard.destroy
+    UserDashboardsServices.new.destroy(@user_dashboard)
     redirect_to(
       user_dashboards_path,
       notice: 'User dashboard was successfully destroyed.'
