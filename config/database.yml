@@ -10,7 +10,7 @@ development:
 
 production:
   <<: *default
-  database: da_prod
+  database: 'dashboards-app-database'
 
 test:
   <<: *default
