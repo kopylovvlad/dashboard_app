@@ -20,6 +20,8 @@
 
 FactoryBot.define do
   factory :user_dashboard do
-    title { Faker::Company.buzzword }
+    sequence(:title) do |i|
+      Faker::Company.buzzword + "_#{i}"
+    end
   end
 end

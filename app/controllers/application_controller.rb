@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# ApplicationController class
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -8,7 +11,11 @@ class ApplicationController < ActionController::Base
     if request.xhr?
       render json: { status: :not_found }
     else
-      render template: 'errors/404', formats: :html, status: :not_found
+      render(
+        template: 'errors/404',
+        formats: :html,
+        status: :not_found
+      )
     end
   end
 
@@ -16,7 +23,11 @@ class ApplicationController < ActionController::Base
     if request.xhr?
       render json: { status: :internal_server_error }
     else
-      render template: 'errors/500', formats: :html, status: :internal_server_error
+      render(
+        template: 'errors/500',
+        formats: :html,
+        status: :internal_server_error
+      )
     end
   end
 end

@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# UserDashboardsController
 class UserDashboardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user_dashboard, only: [:edit, :update, :destroy]
+  before_action :set_user_dashboard, only: %i[edit update destroy]
 
   def index
     @user_dashboards = current_user
@@ -24,7 +27,7 @@ class UserDashboardsController < ApplicationController
         notice: 'User dashboard was successfully created.'
       )
     else
-       render :new
+      render :new
     end
   end
 

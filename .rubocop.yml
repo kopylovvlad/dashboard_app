@@ -1,0 +1,12 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  Exclude:
+    - spec/*
+    - spec/**/*
+    - db/**/*
+    - config/**/*
+    - db/seeds.rb
+    - bin/*
+    - config.ru
