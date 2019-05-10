@@ -6,10 +6,11 @@
 <% if current_user.present? %>
   <p>
     <% if current_user.full_name.size > 0 %>
-      Hello, <%= current_user.full_name %>!
+      Hello, <b><%= current_user.full_name %></b>!
     <% else %>
       Hello!
     <% end %>
+    <br>
     <br>
     <%= link_to 'Click here', user_dashboards_path %>
     to open your dashboards.

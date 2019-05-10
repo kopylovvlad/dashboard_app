@@ -13,27 +13,65 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-.white_link{
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+.white_link {
   color: #fff;
-  &:hover{
+  &:hover {
     color: #fff;
   }
 }
 
-.field_with_errors{
-  input{
+.field_with_errors {
+  input {
     border-color: #d9534f;
   }
-  span.error{
+  span.error {
     color: #d9534f;
     margin-left: 5px;
   }
 }
 
-.container.theme-showcase{
+.pt-8 {
+  padding-top: 8px;
+}
+.ml-15 {
+  margin-left: 15px;
+}
+
+.container.theme-showcase {
   min-height: 650px;
+}
+
+.jumbotron {
+  margin-top: 65px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  background-color: #75cdf7;
+}
+
+.blue {
+  background-color: #75cdf7;
+  color: black;
+
+  a {
+    color: black;
+  }
+}
+
+footer {
+  border-top: solid 1px black;
+}
+.dark-blue {
+  background-color: #459dc7;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+.progress-bar {
+  background-color: #75cdf7;
+}
+.user_remember_me {
+  padding-left: 20px;
 }
